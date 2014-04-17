@@ -1,0 +1,202 @@
+<!--DECLARATION
+TITLE:          php_demo
+CATEGORY:       php   
+SUBCATEGORY:    files
+-->
+[h]Пример первый[/h]
+[meta=keys] pattern, oop, class [/meta]
+[!]
+[a=site.com] Observable [/a] — интерфейс, определяющий методы для добавления, удаления и оповещения наблюдателей.[br]
+[a=site.com] Observer [/a] — интерфейс, с помощью которого наблюдатель получает оповещение.[br]
+[a=site.com] ConcreteObservable [/a] — конкретный класс, который реализует интерфейс Observable.[br]
+[a=site.com] ConcreteObserver [/a] — конкретный класс, который реализует интерфейс Observer.[br]
+[/!]
+
+[code=php]
+<?php
+class ProductItem implements Observer{
+
+    public function __construct(){
+        ExchangeRate::getInstance()->registerObserver($this);
+    }
+
+    public function notify($obj){
+        if($obj instanceof ExchangeRate) {
+            // Update exchange rate data
+            print "Received update!\n";
+        }
+    }
+}
+
+$product1 = new ProductItem();
+$product2 = new ProductItem();
+
+ExchangeRate::getInstance()->setExchangeRate(4.5);
+?>
+[/code]
+
+[h]Пример второй таблицы стилей[/h]
+[!]Шаблон «наблюдатель» применяется в тех случаях, когда система обладает следующими свойствами:[br]
+    существует, как минимум, один объект, рассылающий сообщения[br]
+    имеется не менее одного получателя сообщений, причём их количество и состав могут изменяться во время работы приложения.[br]
+    нет надобности очень сильно связывать взаимодействующие объекты, что полезно для повторного использования.[/!]
+    
+[code=css]  
+ /* fonts */
+        @import "http://webfonts.ru/import/aleksandrac.css";
+        /* font-family: "AleksandraC"; */
+        @import "http://webfonts.ru/import/arnamu.css";
+        /* font-family: "Arian AMU"; */
+        @import "http://webfonts.ru/import/ubuntu.css";
+        /* font-family: "Ubuntu Mono"; */
+        body{
+            background-color: #333333;
+            font-family: "AleksandraC", Arian AMU, AleksandraC, Consolas, Courier, monospace, "Courier New";
+            color: #BBBBBB;
+            text-shadow: 0px 1px 0px #4F4F4F;
+        }
+        .page{
+            width: 860px;
+            margin: 0 auto;
+            background-color: #282828;
+            font-size: 12px;
+            padding: 10px;
+        }
+[/code]
+
+[warning]
+ВАЖНО!!! Данный шаблон часто применяют в ситуациях, в которых отправителя сообщений не интересует, что делают получатели с предоставленной им информацией.
+[/warning]
+
+
+
+[h]Пример второй таблицы стилей[/h]
+[!]Шаблон «наблюдатель» применяется в тех случаях, когда система обладает следующими свойствами:
+    существует, как минимум, один объект, рассылающий сообщения [a=site.com] some site [/a]
+    имеется не менее одного получателя сообщений, причём их количество и состав могут изменяться во время работы приложения.
+    нет надобности очень сильно связывать взаимодействующие объекты, что полезно для повторного использования.[/!]
+
+[code=sql]
+SELECT * FROM (
+  SELECT
+    ROW_NUMBER() OVER (ORDER BY KEY ASC) AS rownumber,
+    COLUMNS
+  FROM tablename
+) AS foo
+WHERE rownumber <= 10
+[/code]
+
+[notice]
+Данный шаблон часто применяют в ситуациях, в которых отправителя сообщений не интересует, что делают получатели с предоставленной им информацией.
+[/notice]
+
+[code=php]
+<?php
+
+include_once(dirname(__FILE__) . "/classes/variables.php");
+
+Kernel::Import("classes.unit.Usual");
+Kernel::Import("classes.data.BillsTable");
+Kernel::Import("classes.data.BillServicesTable");
+Kernel::Import("classes.data.ServicesTable");
+Kernel::Import("classes.data.RatesTable");
+
+class IndexPage extends UsualPage {
+
+  function OnAddSelected() {
+    $this->response->maintemplate = 'void.tpl';
+    $services = $this->request->Value('INTSERVICEID');
+    $rates = $this->request->Value('INTRATEID');
+    $aid = $this->request->getString('aid', null, 0);
+    if ($aid) {
+      if (!empty($services)) {
+        $data['ININTSERVICEID'] = implode(',', $services);
+        $list = $this->ServicesTable->getList(array('ININTSERVICEID' => implode(',', $services)));
+        foreach ($list as $row) {
+          $data['INTSERVICEID'] = $row['INTSERVICEID'];
+          $data['INTBILLID'] = $aid;
+          $data['VARNAME'] = $row['VARNAME'];
+          $data['VARCODE'] = $row['VARCODE'];
+          $data['VARPRICE'] = $row['VARPRICE'];
+          $data['INTCHANG'] = 1;
+          $data['INTCOUNT'] = 1;
+          $data['INTNOTSETDATE'] = !$row['INTPERIOD'];
+          $data['VARDATE'] = date('d.m.Y H:i:s');
+
+          $this->BillServiceTable->insert($data);
+        }
+      }
+    }
+    $this->AddList($aid);
+    $this->setTemplate('billserv.list.tpl');
+    echo $this->response->display();
+    $this->terminatepage();
+  }
+
+  function AddList($aid) {
+    $id = intval($aid);
+    $this->document->addValue('servdata', $this->BillServiceTable->getList("INTBILLID='" . $id . "'", null, null, 'GetWithRNames'));
+  }
+
+Kernel::ProcessPage(new IndexPage(CURRENT_SCRIPT . ".tpl"));
+?>[/code]
+
+
+[code]
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>Untitled Page</title>
+	<style type="text/css" media="screen" id="test">
+		/* HEADER */
+		.topLogo{
+		    display: inline-block;
+		    font-weight: bold;
+		    width: 200px;
+		}
+		.topSearch{
+		    display: inline-block;
+		    width: 400px;
+		}
+		.topSearch input[type=text]{
+		    padding: 0;
+		    background-color: #111111;
+		    border: 1px solid #797979; color: #FF3300;
+		}
+	</style>
+<script type="text/javascript">
+		$(document).ready(function () {
+		    $('ul#left_ul ul').each(function (i) { // Check each submenu:
+		        if ($.cookie('submenuMark-' + i)) {  // If index of submenu is marked in cookies:
+		            $(this).show().prev().removeClass('collapsed').addClass('expanded'); // Show it (add apropriate classes)
+		        } else {
+		            $(this).hide().prev().removeClass('expanded').addClass('collapsed'); // Hide it
+		        }
+		        $(this).prev().addClass('collapsible').click(function () { // Attach an event listener
+		            var this_i = $('ul#left_ul ul').index($(this).next()); // The index of the submenu of the clicked link
+		            if ($(this).next().css('display') == 'none') {
+		                $(this).next().slideDown(200, function () { // Show submenu:
+		                    $(this).prev().removeClass('collapsed').addClass('expanded');
+		                    cookieSet(this_i);
+		                });
+		            } else {
+		                $(this).next().slideUp(200, function () { // Hide submenu:
+		                    $(this).prev().removeClass('expanded').addClass('collapsed');
+		                    cookieDel(this_i);
+		                    $(this).find('ul').each(function () {
+		                        $(this).hide(0, cookieDel($('ul#left_ul ul').index($(this)))).prev().removeClass('expanded').addClass('collapsed');
+		                    });
+		                });
+		            }
+		            return false; // Prohibit the browser to follow the link address
+		        });
+		    });
+		});
+</script>
+</head>
+<body>
+	<div id="test" class="test">
+		<h1>Hellow world!</h1>
+	</div>
+</body>
+</html>
+[/code]

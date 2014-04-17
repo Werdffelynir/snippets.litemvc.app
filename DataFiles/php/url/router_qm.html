@@ -1,0 +1,109 @@
+[h]Router Qm[/h]
+[!]Определение колен URL строки[/!]
+[code=php]
+self::$config['path'] = __DIR__;
+
+$appPathInfo = pathinfo($config['path']);
+self::$config['appPath'] = $appPathInfo['dirname'] . DS . $appPathInfo['basename'] . DS;
+self::$config['appDir'] = $appPathInfo['basename'];
+
+//...
+
+
+// Определения URL параметров с запроса
+$basePath = (isset(self::$config['basePath']))? $basePath = self::$config['basePath']:false;
+if($basePath){
+    if(strlen($basePath) < 2 ){
+        $parts = array_diff(explode('/', $_SERVER['REQUEST_URI']), array(''));
+    }else{
+        $parts = array_diff(explode('/', str_replace($basePath, '', $_SERVER['REQUEST_URI'])), array(''));
+    }
+}elseif((self::$config['appDir'] != $_SERVER['HTTP_HOST'])){
+    $parts = explode('/', $_SERVER['REQUEST_URI']);
+    foreach ($parts as $k => $v) {
+        if ($v != self::$config['appDir']) {
+            unset($parts[$k]);
+        } else {
+            unset($parts[$k]);
+            break;
+        }
+    }
+}else
+    $parts = array_diff(explode('/', $_SERVER['REQUEST_URI']),array(''));
+
+// bind system router array
+self::$router = array(
+    'controllerFolder' => false,
+    'argsReg' => false,
+);
+
+// Применения параметра "routeType" если установлен по переименованию, 
+// выполняеться если в конфигурации выставлин параметр "routeType"=>'simple';
+// дальнейшая обработка выполняеться по умолчанию как и без этого параметра,
+// при типе 'regex' обработка происходит в методе runController()
+if (self::$config["routeType"] == 'simple') {
+    $partsLine = join('/', $parts);
+    foreach (self::$config["routeReName"] as $reOnce) {
+        if (strpos($partsLine, $reOnce[0]) > "-1") {
+            $priority = (isset($reOnce[3])) ? $reOnce[3] : 1;
+            $routerArray[$priority] = array($reOnce[0], $reOnce[1]);
+        }
+    }
+    if (!empty($routerArray)) {
+        ksort($routerArray);
+        $replace = array_shift($routerArray);
+        $partsLineReplace = str_ireplace($replace[0], $replace[1], $partsLine);
+        $parts = explode('/', $partsLineReplace);
+    }
+
+} elseif (self::$config["routeType"] == 'regex') {
+
+    $partsLine = join('/', $parts);
+    foreach (self::$config["routeReName"] as $reOnce) {
+        $priority = (isset($reOnce[2])) ? $reOnce[2] : 10;
+        $this->routeRegEx($reOnce[0], array($reOnce[1][0], $reOnce[1][1]), $priority);
+        if (preg_match($this->_regex['reg'], $partsLine, $matches)) {
+            $routerArray[$this->_regex['priority']]['callback'] = $this->_regex['callback'];
+            $routerArray[$this->_regex['priority']]['argsReg'] = $matches;
+        }
+    }
+    if (!empty($routerArray)) {
+        krsort($routerArray);
+        $_parts = array_shift($routerArray);
+        $parts = $_parts['callback'];
+        self::$router['argsReg'] = $_parts['argsReg'];
+    }
+}
+
+// Назначение роутов в защищенные массив, используеться только ядром
+self::$router['request'] = (is_array($parts)) ? $parts : false;
+self::$router['slug'] = join('/', $parts);
+self::$router['controller'] = ($c = array_shift($parts)) ? $c : self::$config['defaultController'];
+self::$router['method'] = ($m = array_shift($parts)) ? $m : self::$config['defaultMethod'];
+self::$router['args'] = (isset($parts)) ? $parts : array();[/code]
+
+[h]Роутер по регулярным выражениям[/h]
+[code=php]// Keep the original routing rule for debugging/unit tests
+// Custom capture, format: <:var_name|regex>
+// Alphanumeric capture (0-9A-Za-z-_), format: <:var_name>
+// Numeric capture (0-9), format: <#var_name>
+// Wildcard capture (Anything INCLUDING directory separators), format: <*var_name>
+// Wildcard capture (Anything EXCLUDING directory separators), format: <!var_name>
+// Add the regular expression syntax to make sure we do a full match or no match
+public function routeRegEx($route, $callback, $priority = 10)
+{
+    $route = preg_replace('/\<\:(.*?)\|(.*?)\>/', '(?P<\1>\2)', $route);
+    $route = preg_replace('/\<\:(.*?)\>/', '(?P<\1>[A-Za-z0-9\-\_]+)', $route);
+    $route = preg_replace('/\<\#(.*?)\>/', '(?P<\1>[0-9]+)', $route);
+    $route = preg_replace('/\<\*(.*?)\>/', '(?P<\1>.+)', $route);
+    $route = preg_replace('/\<\!(.*?)\>/', '(?P<\1>[^\/]+)', $route);
+    $route = '#^' . $route . '$#';
+    $this->_regex['reg'] = $route;
+    $this->_regex['priority'] = $priority;
+    $this->_regex['callback'] = $callback;
+    return true;
+}[/code]
+
+
+
+

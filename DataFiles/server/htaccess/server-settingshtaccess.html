@@ -1,0 +1,50 @@
+<!--DECLARATION
+ID:             156
+TITLE:          server_settings.htaccess
+CATEGORY:       server   
+SUBCATEGORY:    .htaccess  
+--> 
+# Заставляем PHP-скрипты работать на HTML-страницах, или указать другой
+[code]RemoveHandler .html .htm
+AddType application/x-httpd-php .php .htm .html .phtml
+[/code]
+
+
+# Несколько индексных файлов. C помощью этой директивы вы указываете какой index - файл будет открываться в первую очередь. Причём последовательность здесь идёт слева на право.
+[code]DirectoryIndex index.html index.php kernel.php index.shtml
+[/code]
+ 
+
+# Денвер виден из под локальной сети
+[code]dnwr_ip   192.168.1.7
+dnwr_host mysite.loc
+dnwr_port 80
+[/code]
+
+
+# Распознавание UTF-8 поумолчанию
+[code]AddDefaultCharset UTF-8
+[/code]
+
+
+# Убираем IE image toolbar через .htaccess
+[code]Header set imagetoolbar "no"
+[/code]
+
+
+# ЧПУ (URLы)
+[code]RewriteEngine on
+RewriteCond $1 !^(index.php|images|robots.txt)
+RewriteRule ^(.*)$ /index.php/$1 [L]
+[/code]
+# Все запросы HTTP за исключением тех, которые направлены к index.php, изображениям (images) и robots.txt рассматривается как запрос к файлу index.php
+
+
+
+# создать перенаправление, скрыть настоящую ссылку "upload/files/__file__" на "download/__file__"
+[code]RewriteEngine on
+Options +FollowSymlinks
+RewriteBase /
+RewriteRule ^upload/(.*)$ t_upload/t_files/$1 [L]
+[/code]
+

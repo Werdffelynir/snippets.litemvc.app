@@ -1,0 +1,58 @@
+[h]RGB и RGBA[/h]
+[code=css]background: rgb( 0, 255, 0); /* чистый зеленый цвет */
+/* Для RGBA добавляется четвертый параметр — альфапрозрачность (от 0 до 1).
+ чистый красный с прозрачностью 50% */
+background: rgba( 255, 0, 0, 0.5); [/code]
+
+[h]Смена бг кликом по кнопке (js)[/h]
+[code]<input type="button" OnClick="document.body.style.backgroundColor='#FF0000'" value="сменить фон">
+<input type="button" OnClick="document.body.style.backgroundImage='/images/fon.jpg'" value="сменить фон">[/code]
+
+[h]Вложеные свойства[/h]
+[code=css]background: url("bg.gif") #CCCCCC 0% 50% repeat-x scroll;
+background: #1a2d32 url(top.png) top center no-repeat;[/code]
+
+[h]Множество фоновых изображений для элемента[/h]
+Для того, чтобы включить несколько фонов внутри одного элемента, можно прописать правильные свойства через запятую, следующим способом: 
+[code=css]/*  V 1 */
+name { 
+    background: 
+         ​url(../images/bottom-left.png) top right fixed no-repeat, 
+         ​url(../images/bottom-right.png) top left fixed no-repeat, 
+         ​url(../images/top-left.png) bottom left fixed no-repeat, 
+         url(../images/top-right.png) bottom right fixed no-repeat; 
+   background-color:#f3509f; 
+}
+ 
+/*  V 2 */
+background-image: url(flower.png), url(ball.png), url(grass.png);
+background-repeat: no-repeat;
+background-position: center center, 20% 80%, bottom right;
+background-origin: border-box, content-box, content-box;
+
+/*  V 3 */
+background-image: url(flower.png), url(ball.png), url(grass.png);
+background-repeat: no-repeat;
+background-position: -100px 0px, 100px 0px, 0px 0px;
+ 
+/*  V 4 */
+< div style="background:url('../images/Fon1.png')no-repeat" > 
+    < div style="background:url('../images/Fon2.png')no-repeat" > 
+        < div style="background:url('../images/Fon3.png')no-repeat" > 
+            <!--  Фокус с использованием вложеных блоков  -->
+        < /div > 
+    < /div > 
+< /div >[/code]
+
+[h]Приминить зафиксированый повторяющейся по оси[/h]
+[code=css]body {
+   background: red url("pendant.gif");
+   background-repeat: repeat-y;
+   background-attachment: fixed; 
+}[/code]
+
+[h][/h]
+[code=css][/code]
+
+[h][/h]
+[code=css][/code]

@@ -1,0 +1,22 @@
+[br]Отключить проверку орфоргафии в textarea
+[code]<textarea spellcheck="false"></textarea>[/code]
+
+Отправка файлов
+[code]<form enctype="multipart/form-data"></form>[/code]
+
+Подсказка в input и textarea
+[code]<input placeholder="Текст" />[/code]
+
+Отключить автозаполнение форм и полей форм
+Атрибут autocomplete="off" для всей формы и ее елементов
+[code]<form method="post" autocomplete="off" action="">
+    [...]
+</form>[/code]
+Атрибут autocomplete="off" для одного поля
+[code]<input type="text" autocomplete="off" value="">[/code]
+
+Текст редактируемый в блоке
+[code]<div contentEditable="true"  spellcheck="false"></div>[/code]
+
+Атребут в ссылке download обезпечивает что файл будет скачиваться пользователем, но не открываться в браузере
+[code]<a href="/public/download_file.html" download >download_file</a> [/code]

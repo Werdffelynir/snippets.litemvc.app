@@ -1,0 +1,454 @@
+{
+    "name": "",
+    "css_prefix_text": "icon-",
+    "css_use_suffix": false,
+    "hinting": true,
+    "units_per_em": 1000,
+    "ascent": 850,
+    "glyphs": [
+        {
+            "uid": "e45e9f27ce40ba9837cc984076d98067",
+            "css": "search",
+            "code": 59397,
+            "src": "elusive"
+        },
+        {
+            "uid": "628e5fc59fc5965a6b91189467b037d5",
+            "css": "heart",
+            "code": 59432,
+            "src": "elusive"
+        },
+        {
+            "uid": "e1c372b8d386329b38dff5cd1ec46513",
+            "css": "star",
+            "code": 59396,
+            "src": "elusive"
+        },
+        {
+            "uid": "caed304a2bf6248f01e98c2aa30db1d7",
+            "css": "star-circled",
+            "code": 59415,
+            "src": "elusive"
+        },
+        {
+            "uid": "8346e81b88fa3c57b42978f8b137a93a",
+            "css": "star-empty",
+            "code": 59404,
+            "src": "elusive"
+        },
+        {
+            "uid": "2c576f7c6c3233c31abad0899fc9f4af",
+            "css": "user",
+            "code": 59435,
+            "src": "elusive"
+        },
+        {
+            "uid": "a1be363d4de9be39857893d4134f6215",
+            "css": "picture",
+            "code": 59433,
+            "src": "elusive"
+        },
+        {
+            "uid": "6b6e59e33915710a9f935b04a06d507d",
+            "css": "camera",
+            "code": 59434,
+            "src": "elusive"
+        },
+        {
+            "uid": "745f28cc6b06e5d131f6d650377b6cf5",
+            "css": "photo",
+            "code": 59395,
+            "src": "elusive"
+        },
+        {
+            "uid": "76f961b11f65300838a5a78856aca30f",
+            "css": "th-large",
+            "code": 59392,
+            "src": "elusive"
+        },
+        {
+            "uid": "93faa7cec68bf69ec455bbab61e58e48",
+            "css": "th",
+            "code": 59393,
+            "src": "elusive"
+        },
+        {
+            "uid": "50e664a6f12199784c02600b2ccfd60a",
+            "css": "th-list",
+            "code": 59394,
+            "src": "elusive"
+        },
+        {
+            "uid": "630d3c819e595abc344053e18872017b",
+            "css": "view-mode",
+            "code": 59493,
+            "src": "elusive"
+        },
+        {
+            "uid": "ce7452abce8b55ded1c393997a51e6b3",
+            "css": "ok",
+            "code": 59402,
+            "src": "elusive"
+        },
+        {
+            "uid": "56b0141d7bbb0717fc6246ea145bc0bd",
+            "css": "ok-circled2",
+            "code": 59515,
+            "src": "elusive"
+        },
+        {
+            "uid": "499b745a2e2485bdd059c3a53d048e5f",
+            "css": "cancel",
+            "code": 59401,
+            "src": "elusive"
+        },
+        {
+            "uid": "55e2ff85b1c459c383f46da6e96014b0",
+            "css": "plus",
+            "code": 59400,
+            "src": "elusive"
+        },
+        {
+            "uid": "0fb1948386f4581c72424a69587e6471",
+            "css": "minus",
+            "code": 59441,
+            "src": "elusive"
+        },
+        {
+            "uid": "a7289537a68b15b24bd4e3ee1ac20dfa",
+            "css": "help",
+            "code": 59442,
+            "src": "elusive"
+        },
+        {
+            "uid": "829c06a0a3b73b02a6224f4bbb73d99c",
+            "css": "home",
+            "code": 59417,
+            "src": "elusive"
+        },
+        {
+            "uid": "cb89a11fa3722b7648ce26f40aaed8f0",
+            "css": "website",
+            "code": 59496,
+            "src": "elusive"
+        },
+        {
+            "uid": "a7dac3a6d7b1fdf3a67a9f2530afaaed",
+            "css": "website-circled",
+            "code": 59517,
+            "src": "elusive"
+        },
+        {
+            "uid": "0be76e79cf83a68ecb961121c00b9f2d",
+            "css": "attach",
+            "code": 59416,
+            "src": "elusive"
+        },
+        {
+            "uid": "f7838631ee8af22feedf7358e02ef8e2",
+            "css": "attach-circled",
+            "code": 59518,
+            "src": "elusive"
+        },
+        {
+            "uid": "e45a3da2ebde8bc8e30a873f3bd51f30",
+            "css": "eye",
+            "code": 59494,
+            "src": "elusive"
+        },
+        {
+            "uid": "d218294e6f9f7191f6b0b3d1ff6239ff",
+            "css": "eye-off",
+            "code": 59495,
+            "src": "elusive"
+        },
+        {
+            "uid": "630529f03c319c01101aa167181b650e",
+            "css": "tag",
+            "code": 59414,
+            "src": "elusive"
+        },
+        {
+            "uid": "937a0ad3f6e25611bff801445d6a4885",
+            "css": "tags",
+            "code": 59413,
+            "src": "elusive"
+        },
+        {
+            "uid": "8d2b0a28ccbfc06bb840720e554d79cc",
+            "css": "bookmark",
+            "code": 59411,
+            "src": "elusive"
+        },
+        {
+            "uid": "363271b58af838dd4be5013284672322",
+            "css": "bookmark-empty",
+            "code": 59409,
+            "src": "elusive"
+        },
+        {
+            "uid": "25acee28eb78eaa800b32bb6f20ebc62",
+            "css": "flag",
+            "code": 59410,
+            "src": "elusive"
+        },
+        {
+            "uid": "0464d6f35a7fe587434173f42ddace88",
+            "css": "thumbs-up",
+            "code": 59426,
+            "src": "elusive"
+        },
+        {
+            "uid": "3849753858193b4d6e07afa834aff979",
+            "css": "thumbs-down",
+            "code": 59427,
+            "src": "elusive"
+        },
+        {
+            "uid": "05a2f4c4839012434774cc1ceb4c0f9b",
+            "css": "download-alt",
+            "code": 59403,
+            "src": "elusive"
+        },
+        {
+            "uid": "62b0580ee8edc3a3edfbf68a47c852d5",
+            "css": "pencil",
+            "code": 59405,
+            "src": "elusive"
+        },
+        {
+            "uid": "7b6c617d6d1e3f22db493839f0483bf6",
+            "css": "edit",
+            "code": 59399,
+            "src": "elusive"
+        },
+        {
+            "uid": "6059b7737287728091ce7e4c600cca56",
+            "css": "edit-alt",
+            "code": 59406,
+            "src": "elusive"
+        },
+        {
+            "uid": "358afb4e7d145cc3384f2db0427fff92",
+            "css": "retweet",
+            "code": 59502,
+            "src": "elusive"
+        },
+        {
+            "uid": "23710230c21b4af140947e3604cc67a5",
+            "css": "comment",
+            "code": 59407,
+            "src": "elusive"
+        },
+        {
+            "uid": "afdb6de29702e88d79539d600c42d4a8",
+            "css": "comment-alt",
+            "code": 59408,
+            "src": "elusive"
+        },
+        {
+            "uid": "3fe5b810589a16bc691e3e979b2789dc",
+            "css": "warning",
+            "code": 59412,
+            "src": "elusive"
+        },
+        {
+            "uid": "711fdb6caa365d5b69d4a72da2009cf6",
+            "css": "exclamation",
+            "code": 59514,
+            "src": "elusive"
+        },
+        {
+            "uid": "3ab2abf6f936d3e53ee8c184cedaed82",
+            "css": "trash",
+            "code": 59398,
+            "src": "elusive"
+        },
+        {
+            "uid": "9e0404ba55575a540164db9a5ad511df",
+            "css": "doc-new",
+            "code": 59436,
+            "src": "elusive"
+        },
+        {
+            "uid": "9eece2885134734c5bc085fdd4955af1",
+            "css": "folder",
+            "code": 59437,
+            "src": "elusive"
+        },
+        {
+            "uid": "6083c8aa5e3345476a24a28ac1afaa61",
+            "css": "cog",
+            "code": 59440,
+            "src": "elusive"
+        },
+        {
+            "uid": "a79ef2d6f102af86440aa80238d5f4b0",
+            "css": "down",
+            "code": 59425,
+            "src": "elusive"
+        },
+        {
+            "uid": "fb3f247b54ed6149e1978bc3145e239a",
+            "css": "stop",
+            "code": 59418,
+            "src": "elusive"
+        },
+        {
+            "uid": "4f805cf4ac0dd68ab439dc36859b85d3",
+            "css": "pause",
+            "code": 59424,
+            "src": "elusive"
+        },
+        {
+            "uid": "14cab076c708524c1031b29ffd1c188f",
+            "css": "record",
+            "code": 59509,
+            "src": "elusive"
+        },
+        {
+            "uid": "cf772d9d1eca484c9772a98045dd39d6",
+            "css": "target",
+            "code": 59505,
+            "src": "elusive"
+        },
+        {
+            "uid": "abe051e31ad705400cf6226b24b6e828",
+            "css": "desktop",
+            "code": 59504,
+            "src": "elusive"
+        },
+        {
+            "uid": "1a94339c1ab20395e6a1475d8745714d",
+            "css": "inbox",
+            "code": 59423,
+            "src": "elusive"
+        },
+        {
+            "uid": "967c5bc59a043f85bfce1434029c6a1c",
+            "css": "inbox-alt",
+            "code": 59503,
+            "src": "elusive"
+        },
+        {
+            "uid": "a904215f9fea569335d2a8addb4356b4",
+            "css": "leaf",
+            "code": 59486,
+            "src": "elusive"
+        },
+        {
+            "uid": "55f7ab3f2bedec72e8400fa2798a7a1a",
+            "css": "align-justify",
+            "code": 59419,
+            "src": "elusive"
+        },
+        {
+            "uid": "310c0c174fb8843a83ad0a7c6da85c56",
+            "css": "briefcase",
+            "code": 59421,
+            "src": "elusive"
+        },
+        {
+            "uid": "a4232c4b087d715e826ba0793dab59ae",
+            "css": "book",
+            "code": 59485,
+            "src": "elusive"
+        },
+        {
+            "uid": "cc8e2a0eff0356811984b84a868524f8",
+            "css": "check-empty",
+            "code": 59422,
+            "src": "elusive"
+        },
+        {
+            "uid": "9de7039d5c9559926fe13880aa03ff51",
+            "css": "asterisk",
+            "code": 59420,
+            "src": "elusive"
+        },
+        {
+            "uid": "dc73bee1d58539abe8c96b958bf4c931",
+            "css": "fire",
+            "code": 59499,
+            "src": "elusive"
+        },
+        {
+            "uid": "8c9fbdd92132007cf2f5e13b7ecb38f0",
+            "css": "credit-card",
+            "code": 59459,
+            "src": "elusive"
+        },
+        {
+            "uid": "272e08e0e16226aadf94dcbf33aab2b2",
+            "css": "key",
+            "code": 59456,
+            "src": "elusive"
+        },
+        {
+            "uid": "1a14e43d8e27f5b63fb418b586a2ade3",
+            "css": "certificate",
+            "code": 59457,
+            "src": "elusive"
+        },
+        {
+            "uid": "10fdd98fb50c590b805a3ad6ff9c55f5",
+            "css": "asl",
+            "code": 59469,
+            "src": "elusive"
+        },
+        {
+            "uid": "a3662e0fce8c28f9b91a3889094cd1e9",
+            "css": "glasses",
+            "code": 59468,
+            "src": "elusive"
+        },
+        {
+            "uid": "1e394b6cd5e0da3e10d8e4f3fe355960",
+            "css": "adult",
+            "code": 59467,
+            "src": "elusive"
+        },
+        {
+            "uid": "d4385b9337eeaa7feb48465b50649042",
+            "css": "universal-access",
+            "code": 59466,
+            "src": "elusive"
+        },
+        {
+            "uid": "51d26008d35b3c8b15a48f49e2b08860",
+            "css": "male",
+            "code": 59464,
+            "src": "elusive"
+        },
+        {
+            "uid": "471497b78b90ca63aa21b13bf4c46cf4",
+            "css": "female",
+            "code": 59465,
+            "src": "elusive"
+        },
+        {
+            "uid": "c99e966e3d22ec0b9d8678fd524e5512",
+            "css": "facebook",
+            "code": 59483,
+            "src": "elusive"
+        },
+        {
+            "uid": "aa18911cd641967c899c575aeb80cd7e",
+            "css": "github",
+            "code": 59479,
+            "src": "elusive"
+        },
+        {
+            "uid": "798f480ad47c7c7fa6c64ece88ea2180",
+            "css": "github-text",
+            "code": 59478,
+            "src": "elusive"
+        },
+        {
+            "uid": "a58fe946fe31826f0b19cb4dfaaf13d2",
+            "css": "googleplus",
+            "code": 59477,
+            "src": "elusive"
+        }
+    ]
+}

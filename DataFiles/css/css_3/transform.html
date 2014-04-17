@@ -1,0 +1,102 @@
+// Трансформирует элемент, в частности, позволяет его масштабировать, вращать, сдвигать, наклонять, а также комбинировать виды трансформаций.
+
+/*{  transform: <функция> [<функция>]* | none  }*/
+
+{  примеры [ Анимация блоков только с помощью CSS ]  }
+
+// Функции трансформации
+
+matrix
+//Задаёт матрицу преобразований.
+
+rotate 
+//Поворот элемента на заданный угол относительно точки трансформации, задаваемой свойством transform-origin.
+
+transform: rotate([угол])
+-webkit-transform: rotate(90deg);
+-moz-transform: rotate(90deg);
+transform: rotate(90deg);
+
+scale
+//Масштаб элемента по горизонтали и вертикали.
+//Значение больше 1 увеличивает масштаб элемента, меньше 1 — уменьшает масштаб.
+
+transform: scale(sx[, sy]);
+-webkit-transform: scale(1.3);
+-moz-transform: scale(1.3);
+transform: scale(1.3);
+
+
+scaleX
+//Масштабирует элемент по горизонтали.
+
+transform: scaleX(sx);
+-webkit-transform: scaleX(1.3);
+-moz-transform: scaleX(1.3);
+transform: scaleX(1.3);
+
+
+scaleY
+//Масштабирует элемент по вертикали.
+
+transform: scaleY(sy);
+-webkit-transform: scaleY(1.3);
+-moz-transform: scaleY(1.3);
+transform: scaleY(1.3);
+
+
+skewX
+//Наклоняет элемент на заданный угол по вертикали.
+
+transform: skewX([угол])
+-webkit-transform: skewX(30deg);
+-moz-transform: skewX(30deg);
+transform: skewX(30deg);
+
+
+skewY
+//Наклоняет элемент на заданный угол по горизонтали.
+
+transform: skewY([угол])
+-webkit-transform: skewY(30deg);
+-moz-transform: skewY(30deg);
+transform: skewY(30deg);
+
+
+translate
+//Сдвигает элемент на заданное значение по горизонтали и вертикали.
+
+transform: translate(tx[, ty])
+-webkit-transform: translate(50px, 20px);
+-moz-transform: translate(50px, 20px);
+transform: translate(50px, 20px);
+
+
+translateX
+//Сдвигает элемент по горизонтали на указанное значение. Положительное значение сдвигает вправо, отрицательное влево.
+
+transform: translateX(tx)
+-webkit-transform: translateX(50px);
+-moz-transform: translateX(50px);
+transform: translateX(50px);
+
+
+translateY
+//Сдвигает элемент по вертикали на указанное значение. Положительное значение сдвигает вверх, отрицательное вниз.
+
+transform: translateY(ty)
+-webkit-transform: translateY(50px);
+-moz-transform: translateY(50px);
+transform: translateY(50px);
+ 
+
+//Пример
+
+a:hover {
+    -webkit-transform: rotate(50deg);
+   -moz-transform: rotate(50deg);
+   -ms-transform: rotate(50deg);
+   -o-transform: rotate(50deg);
+   transform: rotate(50deg);
+   -moz-transition: all 500ms linear 0s;
+}

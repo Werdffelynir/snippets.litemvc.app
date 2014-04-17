@@ -1,0 +1,39 @@
+[h]Базовый конструктор[/h][!][/!]
+[code=php]$query = explode("?", $_SERVER['REQUEST_URI']);
+$uri = $query[0];
+$args = $query[1];
+// дальше разбирать каждый отдельно[/code]
+
+
+[h]Роутер с какойто CMS[/h][!][/!]
+[code=php]function route()
+{
+    $request = explode('/', trim($_SERVER['REQUEST_URI'], '/'));
+    $controller = !empty($request[0]) ? ucfirst(strtolower($request[0])) . 'Controller' : 'IndexController';
+    $method = !empty($request[1]) ? strtolower($request[1]) : 'base';
+    if (!file_exists("application/controllers/$controller.php")) 
+        throw new Exeption ('Controller does not exists');
+    $controller = new $controller($this);
+    if (!method_exists($controller, $method)) 
+        throw new Exeption ('Method does not exists');
+    else 
+        $controller->$method(@$request[2], @$request[3], @$request[4]);
+}[/code]
+
+[h][/h][!][/!]
+[code=php][/code]
+
+[h][/h][!][/!]
+[code=php][/code]
+
+[h][/h][!][/!]
+[code=php][/code]
+
+[h][/h][!][/!]
+[code=php][/code]
+
+[h][/h][!][/!]
+[code=php][/code]
+
+[h][/h][!][/!]
+[code=php][/code]

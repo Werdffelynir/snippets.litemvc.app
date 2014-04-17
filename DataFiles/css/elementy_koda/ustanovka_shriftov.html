@@ -1,0 +1,13 @@
+[code=css]@font-face {
+    font-family: Scriptorama; /* имя шрифта для CSS правил */
+    src: local("Scriptorama"), /* проверяем наличие в ОС пользователя */
+    url(path-to/Scriptorama.ttf); /* если не установлен, загружаем */
+}
+
+/*Только для Internet Explorer*/
+@font-face {
+    font-family: Scriptorama;
+    src: local("Scriptorama"),
+    url(path-to/Scriptorama.eot);
+}[/code]
+

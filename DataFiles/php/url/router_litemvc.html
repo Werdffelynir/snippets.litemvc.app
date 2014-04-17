@@ -1,0 +1,67 @@
+[h]Парсинт Router на примере LiteMVC[/h]
+[code=php]
+// Необходима инфо для правельного автоматического
+// парсинга.
+$appPathInfo = pathinfo($config['path']);
+$appPath = $appPathInfo['dirname'] . DS . $appPathInfo['basename'] . DS;
+$appDir = $appPathInfo['basename'];
+
+// и актуальная URL строка
+$parts = explode('/', $_SERVER['REQUEST_URI']);
+
+// Определение колена строки | массива по названию 
+// для уяснения текущей директории
+foreach ($parts as $k => $v) {
+    if ($v != $appDir) {
+        unset($parts[$k]);
+    } else {
+        unset($parts[$k]);
+        break;
+    }
+}
+// массив приводим в порядок
+$parts = array_values($parts);
+
+// Определение частей запроса
+$_request = (is_array($parts)) ? $parts : false;
+$_requestLine = join('/', $parts);
+$_controller = ($c = array_shift($parts)) ? $c : 'index';
+$_method = ($m = array_shift($parts)) ? $m : 'index';
+$_args = (isset($parts)) ? $parts : array();
+
+// если указаны реРоутинги, происходит отловка их
+// Например:
+// $config['reRouter'] => array(
+//     'login' => 'index/login',
+//     'page/(\d+)' => 'page/blog',
+// ),
+if (!empty($config['reRouter'])) {
+    foreach ($config['reRouter'] as $regex => $class) {
+        $regex = str_replace('/', '\/', $regex);
+        $regex = '^' . $regex . '\/?$';
+        self::$regOut = array(
+            'regex' => $regex,
+            'request' => $_requestLine,
+        );
+
+        if (preg_match("|$regex|i", $_requestLine, $matches)) {
+            if (strpos($class, '/'))
+                $parts = explode('/', $class);
+            $_controller = ($c = array_shift($parts)) ? $c : 'index';
+            $_method = ($m = array_shift($parts)) ? $m : 'index';
+            $_args = (array_shift($matches)) ? $matches : array();
+
+            self::$regOut["result"] = $matches;
+        }
+    }
+}
+
+// Окончательно готовые колена адресной строки
+$controller = $_controller;
+$method = $_method;
+$args = $_args;
+$requestLine = $_requestLine;
+[/code]
+
+[h][/h]
+[code][/code]

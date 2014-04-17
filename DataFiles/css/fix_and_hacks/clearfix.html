@@ -1,0 +1,43 @@
+[h]Простой Clearfix[/h]
+[code=css].clear_line{clear: both; width: 100%; height: 1px; margin-top: -1px;}
+.clear:before, .clear:after{content: " "; display: table;}
+.clear:after {clear: both;}
+.clear {*zoom: 1;}[/code]
+
+[h]CSS clearfix [/h]
+[code=css].clearfix:after {
+	content: ".";
+	display: block;
+	clear: both;
+	visibility: hidden;
+	line-height: 0;
+	height: 0;
+}
+ 
+.clearfix {
+	display: inline-block;
+}
+ 
+html[xmlns] .clearfix {
+	display: block;
+}
+ 
+* html .clearfix {
+	height: 1%;
+}[/code]
+
+[h]Micro-Clearfix[/h]
+[code=css].clear:before,
+.clear:after {
+    content:"";
+    display:table;
+}
+
+.clear:after {
+    clear:both;
+}
+
+/* For IE 6/7 (trigger hasLayout) */
+.clear{
+    zoom:1;
+}[/code]

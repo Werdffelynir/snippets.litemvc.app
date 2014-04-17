@@ -1,0 +1,127 @@
+[h]Серверный массив[/h]
+[code=php]echo $_SERVER['SERVER_NAME']."\n";     // test.loc
+echo $_SERVER['HTTP_HOST']."\n";       // test.loc
+echo $_SERVER['SCRIPT_FILENAME']."\n"; // E:/__SERVER/domains/test.loc/dir__.php
+echo $_SERVER['SCRIPT_NAME']."\n";     // /dir__.php[/code]
+
+[h]Использувание pathinfo()[/h]
+[code=php]$path_parts = pathinfo('http://phpwork.loc/a_test/a_blog/test.php');
+echo $path_parts['dirname'], " ";   // /a_test/a_blog
+echo $path_parts['basename'], " ";  // test.php
+echo $path_parts['extension'], " "; // php
+echo $path_parts['filename'], " ";  // test
+[/code]
+
+[h]Использувание explode()[/h]
+[code=php]
+$url = 'http://phpwork.loc/a_test/a_blog/test.php';
+$tokens = explode('/', $url);
+echo $tokens[sizeof($tokens)-4], " "; // phpwork.loc
+echo $tokens[sizeof($tokens)-3], " "; // a_test     
+echo $tokens[sizeof($tokens)-2], " "; // a_blog     
+echo $tokens[sizeof($tokens)-1], " "; // test.php   
+
+$my_url = "http://phpwork.loc/a_test/a_blog/test.php"; 
+$pth = explode('/', $my_url);
+echo $pth[count($pth)-4], " "; // phpwork.loc
+echo $pth[count($pth)-3], " "; // a_test
+echo $pth[count($pth)-2], " "; // a_blog
+echo $pth[count($pth)-1], " "; // test.php
+[/code]
+
+[h]Для работы с файлами и директориями[/h]
+[code]echo __FILE__;           // E:\__SERVER\domains\test.loc\thisFile.php
+echo dirname(__FILE__);  // E:\__SERVER\domains\test.loc
+echo basename(__FILE__); // thisFile.php
+echo __DIR__;            // E:\__SERVER\domains\test.loc
+echo dirname(__DIR__);   // E:\__SERVER\domains
+echo basename(__DIR__);  // test.loc
+
+require_once(dirname(__FILE__).'/file.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/folder/file.php');
+
+define('ROOT_DIR', dirname(__FILE__)); 
+define('DIR_PATH', '/home/site.ru/www/');
+require(DIR_PATH.'/folder1/file.php');[/code]
+
+[h]Базовый путь к корню[/h]
+[code]$path = realpath(dirname(__FILE__)).DIRECTORY_SEPARATOR;
+$path = realpath(__DIR__).DIRECTORY_SEPARATOR;
+echo $path; // W://home/phpwork.loc/www/a_test/a_blog/[/code]
+
+[h]Вариант 1 (построеной структуры путей в предложениях)[/h]
+[code]$template = 'template/default';
+$modules = 'modules';
+$system = 'system';
+
+// Скрипт находится в корне, DOCROOT - корневая директория
+define('DOCROOT', realpath(dirname(__FILE__)).DIRECTORY_SEPARATOR);
+
+// проверка на существование дир и составление пути
+if ( ! is_dir($template) AND is_dir(DOCROOT.$template))
+    $template = DOCROOT.$template;
+if ( ! is_dir($modules) AND is_dir(DOCROOT.$modules))
+    $modules = DOCROOT.$modules;
+if ( ! is_dir($system) AND is_dir(DOCROOT.$system))
+    $system = DOCROOT.$system;
+
+// Окончательные константы с путями
+define('TPLPATH', realpath($template).DIRECTORY_SEPARATOR);
+define('MODPATH', realpath($modules).DIRECTORY_SEPARATOR);
+define('SYSPATH', realpath($system).DIRECTORY_SEPARATOR);
+
+// импользовние
+echo TPLPATH;
+echo MODPATH;
+echo SYSPATH;[/code]
+
+[h]Вариант 2 (Пути и URL). Скрипт должен находиться в корне директориии приложения.[/h]
+[code]// Определение URL
+$http_host = $_SERVER['HTTP_HOST'];
+$scr_nam_arr = explode("/", trim($_SERVER['SCRIPT_NAME']));
+
+// Извлечение последнего елемента массива, имени файла
+array_pop($scr_nam_arr);
+
+// Удаление пустых елементов с массива
+$scr_nam_arr = array_filter( $scr_nam_arr, function($el){ 
+    return !empty($el); }
+);
+
+// Обединение в строку
+$pathtifolder = join('/',$scr_nam_arr);
+
+$self      = "".$_SERVER['SCRIPT_NAME'];
+$url       = "http://".$http_host."/".$pathtifolder."";
+$urlSafe   = "https://".$http_host."/".$pathtifolder."";
+$urlNoHTTP = $http_host."/".$pathtifolder."/";
+$urlAdmin  = "http://".$http_host."/".$pathtifolder."/admin";
+$urlTheme  = "http://".$http_host."/".$pathtifolder."/theme";
+$urlPlugin = "http://".$http_host."/".$pathtifolder."/plugin";
+
+// Определение Path
+$root      = dirname(__FILE__).DIRECTORY_SEPARATOR;
+$rootadmin = $root."admin".DIRECTORY_SEPARATOR;
+$roottheme = $root."theme".DIRECTORY_SEPARATOR;
+$rootplugin= $root."plugin".DIRECTORY_SEPARATOR;
+
+// Привязка к функциям
+function url(){ global $url; return $url;}
+function urlAdmin(){ global $urlAdmin; return $urlAdmin;}
+function urlTheme(){ global $urlTheme; return $urlTheme;}
+function urlPlugin(){ global $urlPlugin; return $urlPlugin;}
+function root(){ global $root; return $root;}
+function rootadmin(){ global $rootadmin; return $rootadmin;}
+function roottheme(){ global $roottheme; return $roottheme;}
+function rootplugin(){ global $rootplugin; return $rootplugin;}
+
+
+// Использование
+echo urlAdmin();
+echo rootplugin();[/code]
+
+
+[h]Загруженый URL на данный момент[/h]
+[code]if ("http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'] == $url_nav) {
+    //$class = "current active ";
+}[/code]

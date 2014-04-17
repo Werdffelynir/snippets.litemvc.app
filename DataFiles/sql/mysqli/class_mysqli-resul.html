@@ -1,0 +1,38 @@
+[code]mysqli_result implements Traversable {
+
+/* Свойства */
+	int 	$current_field ;
+	int 	$field_count;
+	array 	$lengths;
+	int 	$num_rows;
+
+/* Методы */
+	bool 	data_seek ( int $offset )
+	mixed 	fetch_all ([ int $resulttype = MYSQLI_NUM ] )
+	mixed 	fetch_array ([ int $resulttype = MYSQLI_BOTH ] )
+	array 	fetch_assoc ( void )
+	object 	fetch_field_direct ( int $fieldnr )
+	object 	fetch_field ( void )
+	array 	fetch_fields ( void )
+	object 	fetch_object ([ string $class_name [, array $params ]] )
+	mixed 	fetch_row ( void )
+	bool 	field_seek ( int $fieldnr )
+	void 	free ( void )
+}[/code]
+
+[h]Содержание[/h]
+[!]mysqli_result::$current_field   — Получает смещение указателя по отношению к текущему полю
+mysqli_result::data_seek        — Перемещает указатель результата на выбранную строку
+mysqli_result::fetch_all        — Выбирает все строки из результирующего набора и помещает их в ассоциативный массив, обычный массив или в оба
+mysqli_result::fetch_array      — Выбирает одну строку из результирующего набора и помещает ее в ассоциативный массив, обычный массив или в оба
+mysqli_result::fetch_assoc      — Извлекает результирующий ряд в виде ассоциативного массива
+mysqli_result::fetch_field_direct — Получение метаданных конкретного поля
+mysqli_result::fetch_field      — Возвращает следующее поле результирующего набора
+mysqli_result::fetch_fields     — Возвращает массив объектов, представляющих поля результирующего набора
+mysqli_result::fetch_object     — Возвращает текущую строку результирующего набора в виде объекта
+mysqli_result::fetch_row        — Получение строки результирующей таблицы в виде массива
+mysqli_result::$field_count     — Получение количества полей в результирующем наборе
+mysqli_result::field_seek       — Установить указатель поля на определенное смещение
+mysqli_result::free             — Освобождает память занятую результатами запроса
+mysqli_result::$lengths         — Возвращает длины полей текущей строки результирующего набора
+mysqli_result::$num_rows        — Получает число рядов в результирующей выборке[/!]

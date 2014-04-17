@@ -1,0 +1,251 @@
+// -------------------------------------------------------------------------------------------------
+[code]function ru_date($format, $date = false) {
+	setlocale(LC_ALL, 'ru_RU.cp1251');
+	if ($date === false) {
+		$date = time();
+	}
+	if ($format === '') {
+		$format = '%e %bg %Y г.';
+	}
+	$months = explode("|", '|января|февраля|марта|апреля|мая|июня|июля|августа|сентября|октября|ноября|декабря');
+	$format = preg_replace("~\%bg~", $months[date('n', $date)], $format);
+	$res = strftime($format, $date);
+}
+echo ru_date('%e %bg', 1345165549); // "17 августа"[/code]
+
+
+
+
+// -------------------------------------------------------------------------------------------------
+
+[code]function russian_date(){
+    $date=explode(".", date("d.m.Y"));
+    switch ($date[1]){
+        case 1: $m='января'; break;
+        case 2: $m='февраля'; break;
+        case 3: $m='марта'; break;
+        case 4: $m='апреля'; break;
+        case 5: $m='мая'; break;
+        case 6: $m='июня'; break;
+        case 7: $m='июля'; break;
+        case 8: $m='августа'; break;
+        case 9: $m='сентября'; break;
+        case 10: $m='октября'; break;
+        case 11: $m='ноября'; break;
+        case 12: $m='декабря'; break;
+    }
+    echo "Сегодня ".$date[0].' '.$m.' '.$date[2];
+}
+russian_date();[/code]
+
+
+
+
+// -------------------------------------------------------------------------------------------------
+[code]switch (date('D')) {
+    case 'Mon':$d='Понедельник'; break;
+    case 'Tue':$d='Вторник'; break;
+    case 'Wed':$d='Среда'; break;
+    case 'Thu':$d='Четверг'; break;
+    case 'Fri':$d='Пятница'; break;
+    case 'Sat':$d='Суббота'; break;
+    case 'Sun':$d='Воскресенье'; break;
+}
+$d=$d.' '.date('j').' ';
+switch(date('M')){
+    case 'Jan':$d=$d.'Января'; break;
+    case 'Feb':$d=$d.'Февраля'; break;
+    case 'Mar':$d=$d.'Марта'; break;
+    case 'Apr':$d=$d.'Апреля'; break;
+    case 'May':$d=$d.'Мая'; break;
+    case 'Jun':$d=$d.'Июня'; break;
+    case 'Jul':$d=$d.'Июля'; break;
+    case 'Aug':$d=$d.'Августа'; break;
+    case 'Sep':$d=$d.'Сентября'; break;
+    case 'Oct':$d=$d.'Октября'; break;
+    case 'Nov':$d=$d.'Ноября'; break;
+    case 'Dec':$d=$d.'Декабря'; break;
+}
+echo $d.' '.date('Y').' года';
+[/code]
+
+
+
+// -------------------------------------------------------------------------------------------------
+// Format the date & time accordingly
+// Locale date & time for no locale server
+// Version 2.1 Author: Dark (_mxm_) http://rusfusion.ru
+ 
+[code]function showdate($format, $val) {
+    global $settings, $userdata, $locale;
+     
+    $months_long = explode("|", $locale['months']);
+    $months_short = explode("|", $locale['shortmonths']);
+     
+    if (isset($userdata['user_offset'])) {
+        $offset = $userdata['user_offset']+$settings['serveroffset'];
+    } else {
+        $offset = $settings['timeoffset']+$settings['serveroffset'];
+    }	
+    if ($format == "shortdate" || $format == "longdate" || $format == "forumdate" || $format == "newsdate") {
+        $format = $settings[$format];
+    }
+    $val = $val + ($offset * 3600);
+    $format = str_replace('%b', $months_short[intval(strftime('%m', $val))], $format);
+    $format = str_replace('%B', $months_long[intval(strftime('%m', $val))], $format);	
+    return strftime($format, $val);
+}[/code]
+
+
+
+
+
+// -------------------------------------------------------------------------------------------------
+[code]$rgLocale = array(
+'n' => array(
+   null,
+   'января',
+   'февраля',
+   'марта',
+   'апреля',
+   'мая',
+   'июня',
+   'июля',
+   'августа',
+   'сентября',
+   'октября',
+   'ноября',
+   'декабря'),
+'w'=>array(
+   'воскресенье',
+   'понедельник',
+   'вторник',
+   'среда',
+   'четверг',
+   'пятница',
+   'суббота')
+);
+$sFormat = 'jго #\\nn# Y года (#\\ww#) - G:i:s';
+ 
+$sDate = preg_replace_callback('/#([a-z]+)([\d]+)#/',function($rgMatches) use (&$rgLocale){return $rgLocale[$rgMatches[1]][(int)$rgMatches[2]];},date($sFormat, $iTime));
+ 
+var_dump($sDate);[/code]
+
+
+
+
+
+// -------------------------------------------------------------------------------------------------
+
+
+[code]$aMon = array("01"=>"январь","1"=>"январь",....);
+list($year,$month,$day) = explode('-',"2008-10-01");
+$RUdate = $day.' '.$aMon[$month].' '.$year; 
+[/code]
+
+
+
+
+[code]function get_date($date)
+{
+ $date = getdate(strtotime($date));
+ $monthList = array('январь', 'февраль', 'март', 'апрель', 'май', 'июнь', 'июль', 'август', 'сентябрь', 'октябрь', 'ноябрь', 'декабрь');
+
+ return $date['mday'].', '.$monthList[$date['mon']-1].', '.$date['year'];
+}
+
+echo get_date('2008-10-01'); // 1, октябрь, 2008 [/code]
+
+// -------------------------------------------------------------------------------------------------
+[code]$a1 = date('G:i:s jго ',$time);
+ 
+$aMonths = array('декабря', 'января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября');
+$month = date('n',$time);
+$name_month = $aMonths[$month];
+ 
+$aDays = array('воскресенье', 'понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота');
+$day = date('w',$time);
+$day_of_weak = $aDays[$day];
+ 
+$yaer = date(' Y года',$time);
+ 
+return $a1.$name_month.$yaer.' ('.$day_of_weak.')';[/code]
+
+
+
+
+
+
+[code]$aMonths = array(null,'января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря');
+    $aDays = array('воскресенье','понедельник','вторник','среда','четверг','пятница','суббота');
+     
+    $sFormat = 'jго \nn Y года (\ww) - G:i:s';
+    $sData = date($sFormat,$time);
+     
+    preg_match('/n(\d)/',$sData,$aMonthIndex);
+    preg_match('/w(\d)/',$sData,$aDayIndex);
+    $iM = $aMonthIndex[1];
+    $iD = $aDayIndex[1];
+     
+    $patterns[0] = "/n\d/";
+    $patterns[1] = "/w\d/";
+     
+    $replacements[0] = $aMonths[$iM];
+    $replacements[1] = $aDays[$iD];
+     
+    return preg_replace($patterns,$replacements,$sData);[/code]
+
+
+// -------------------------------------------------------------------------------------------------
+[code]function rusdate($d, $format = 'j %MONTH% Y', $offset = 0)
+{
+    $montharr = array('января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря');
+    $dayarr = array('понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота', 'воскресенье');
+ 
+    $d += 3600 * $offset;
+ 
+    $sarr = array('/%MONTH%/i', '/%DAYWEEK%/i');
+    $rarr = array( $montharr[date("m", $d) - 1], $dayarr[date("N", $d) - 1] );
+ 
+    $format = preg_replace($sarr, $rarr, $format); 
+    return date($format, $d);
+}[/code]
+
+Первый параметр — юникс-дата, второй — формат выводимой даты. Оба параметра идентичны параметрам PHP-функции date(), однако в формате можно передать два дополнительных шаблона:
+
+%MONTH% — русское название месяца (родительный падеж)
+%DAYWEEK% — русское название дня недели
+
+При необходимости можно с легкостью добавить в реализацию функции другие шаблоны. Пример использования:
+
+[code]echo rusdate( time(), '%DAYWEEK%, j %MONTH% Y, G:i' );[/code]
+
+Результат:
+
+пятница, 16 марта 2012, 23:59
+
+
+// -------------------------------------------------------------------------------------------------
+По сути — стандартная функция date() с вкраплениями в формат вывода на русском языке.
+function ru_date($format,$ts=false) { if(!function_exists('num_word')) { function num_word($n,$a,$b,$c,$m=1){$n=sprintf("%.0f",$n);$x=abs($n>9?mb_substr($n,-2):$n);return($m?($m==2?number_format($n,0,' ',' '):$n).' ':'').(($x%=100)>9&&$x<20||($x%=10)>4||$x==0?$c:($x==1?$a:$b));} } $now = time(); if(!$ts) $ts = $now; $res = ''; $months = array('М'=>array('','Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'),'м'=>array('','января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря')); $weekdays = array('Н'=>array('Воскресенье','Понедельник','Вторник','Среда','Четверг','Пятница','Суббота'),'н'=>array('воскресенье','понедельник','вторник','среда','четверг','пятница','суббота')); $days = array('Д'=>array(-2=>'Позавчера',-1=>'Вчера',0=>'Сегодня',1=>'Завтра',2=>'Послезавтра'),'д'=>array(-2=>'позавчера',-1=>'вчера',0=>'сегодня',1=>'завтра',2=>'послезавтра')); for($i=0;$i<=mb_strlen($format);$i++) { $code = mb_substr($format,$i,1); if($code=='М' || $code=='м') $res .= $months[$code][date('n',$ts)]; elseif($code=='Н' || $code=='н') $res .= $weekdays[$code][date('w',$ts)]; elseif($code=='Д' || $code=='д') { $delta = round((strtotime(date('Y-m-d',$ts))-strtotime(date('Y-m-d')))/86400); $res .= $delta>-3 && $delta<3 ? $days[$code][$delta] : date('j',$ts).' '.$months['м'][date('n',$ts)].(date('Y',$ts)==date('Y')?'':' '.date('Y',$ts).' г.'); } elseif($code=='В' || $code=='в') { $delta = abs($ts-$now); if($delta<30) $res .= $ts-$now>=0 ? ($code == 'В' ? 'Прямо сейчас' : 'прямо сейчас') : ($code == 'В' ? 'Только что' : 'только что'); elseif($delta>1650 && $delta<2050) $res .= $ts-$now>0 ? ($code == 'В' ? 'Через полчаса' : 'через полчаса') : ($code == 'В' ? 'Полчаса назад' : 'полчаса назад'); elseif($delta<3300) $res .= $ts-$now>0 ? ($code == 'В' ? 'Через ' : 'через ').num_word(round($delta/60),'минуту','минуты','минут') : num_word(round($delta/60),'минуту','минуты','минут').' назад'; elseif($delta<86400 && ($delta%3600<=300 || abs(3600-($delta%3600))<=300)) $res .= $ts-$now>0 ? ($code == 'В' ? 'Через ' : 'через ').num_word(round($delta/3600),'час','часа','часов') : num_word(round($delta/3600),'час','часа','часов').' назад'; else return ru_date(str_replace('в','д',str_replace('В','Д',$format)),$ts).' в '.date('G:i',$ts); } else $res .= date(mb_substr($format,$i,1),$ts); } return $res; }
+
+
+Везде, где эта функция объявлена, можно date(...) смело заменять на ru_date(...) с теми же параметрами (кроме предопределенных констант в формате вывода) — ничего не изменится, но ноявится возможность добавления в формат русских букв:
+
+М 	Название месяца с большой буквы (от Январь до Декабрь)
+м 	Название месяца с маленькой буквы для использования вместе с числом (от января до декабря)
+Н 	День недели с большой буквы (от Понедельник до Воскресенье)
+н 	День недели с маленькой буквы (от понедельник до воскресенье)
+Д 	Полная дата. Примеры вариантов: 31 июля 2005 г., 19 сентября (если год совпадает с текущим, он не пишется), Позавчера, Вчера, Сегодня, Завтра, Послезавтра.
+д 	То же самое, что и Д, но слова позавчера, вчера, сегодня, завтра и послезавтра пишутся с маленькой буквы.
+В 	Дата и время (или только время, если дата совпадает с текущей). Результат зависит от того, насколько и в каком направлении (прошлое или будущее) переданное по втором параметре время отличается от текущего. Варианты такие:
+
+• разница от 0 до 30 секунд: Только что или Прямо сейчас;
+• от 30 секунд до 27 минут 30 секунд: N минут назад или Через N минут;
+• от 27 минут 30 секунд до 32 минут 30 секунд: Полчаса назад или Через полчаса;
+• от 32 минут 30 секунд до 55 минут: N минут назад или Через N минут;
+• кратна 3600 секундам (часу) с погрешностью в 300 секунд (5 минут): N часов назад или Через N часов;
+• иначе: 31 июля 2005 г. в 12:00, 19 сентября в 16:11, Сегодня в 3:14.
+
+Для определения словоформ используется функция num_word() (включена в код).
+в 	То же самое, что и В, но первая буква результата будет маленькой.

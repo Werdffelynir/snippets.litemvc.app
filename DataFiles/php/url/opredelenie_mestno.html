@@ -1,0 +1,49 @@
+[code=php]private function init(){
+    // Назначение конфигурации с файла например
+    self::$config['baseUrl'] = 'my-site.com';
+    // назначение результата свойству класса
+    self::$getURL = findUrl();
+}
+
+
+/**
+ * Определение местного URL
+ */
+private function findUrl()
+{
+    $httpHost = $_SERVER['HTTP_HOST'];
+
+    if(!isset(self::$config['baseUrl'])){
+
+        $scrNamArr = explode("/", trim($_SERVER['SCRIPT_NAME']));
+        array_pop($scrNamArr);
+
+        $scrNamArr = array_filter($scrNamArr, function ($el) {
+                return !empty($el);
+            }
+        );
+
+        $pathFolder = join('/', $scrNamArr);
+
+        if (empty($pathFolder)) {
+            $httpHostFull = $httpHost;
+        } else {
+            $httpHostFull = $httpHost . "/" . $pathFolder;
+        }
+
+    }else{
+        $pathFolder = '';
+        $httpHostFull = self::$config['baseUrl'];
+    }
+
+    return array(
+        'nude'=>$pathFolder,
+        'base'=>"http://" . $httpHostFull,
+        'public'=>"http://" . $httpHostFull . "/public",
+        'str'=>$httpHostFull,
+        'safe'=>"https://" . $httpHostFull,
+        'host'=>$httpHost,
+    );
+
+}
+[/code]

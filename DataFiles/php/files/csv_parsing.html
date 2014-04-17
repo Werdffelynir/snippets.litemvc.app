@@ -1,0 +1,24 @@
+[h]Генерация CSV из массива PHP[/h]
+[code]function generateCsv($data, $delimiter = ',', $enclosure = '"') {
+   $handle = fopen('php://temp', 'r+');
+   foreach ($data as $line) {
+       fputcsv($handle, $line, $delimiter, $enclosure);
+   }
+   rewind($handle);
+   while (!feof($handle)) {
+       $contents .= fread($handle, 8192);
+   }
+   fclose($handle);
+   return $contents;
+}
+
+//Использование
+$data = array(
+   array(1, 2, 4),
+   array('test string', 'test, literal, comma', 'test literal "quotes"'),
+);
+
+echo generateCsv($data);
+// outputs:
+// 1,2,4
+// "test string","test, literal, comma","test literal""quote"""[/code]

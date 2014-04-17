@@ -1,0 +1,168 @@
+[h][/h]
+
+[code=php][/code]
+
+::::::::::::::::  PHP redirect (Перенаправление на другую страницу)  :::::::::::::::::
+
+::::::::::::::::  PHP 
+
+// *** Осуществляется путем отправки специального HTTP заголовка функцией header:
+<?php
+header("Request-URI: index.php");
+header("Content-Location: index.php");
+header("Location: index.php");
+?>
+
+<?php
+header('Location: http://my-site/index.php');
+exit;
+?>
+
+// *** Классика
+<?header('Content-type:text/html;charset=utf-8');?>
+<?php
+$time = 3; // назначаем переменню для таймера
+$location = "http://my-site/index.php"; // переменная для перехода
+header("Refresh: $time;url=$location"); // сам переход
+?>
+
+// *** Редирект с задержкой:
+<?php
+header('Refresh: 3; URL=http://my-site/index.php');
+echo 'Через 3 сек. вы будете перенаправлены на новую страницу.';
+exit;
+?>
+
+// *** Редирект с задержкой:
+<?php
+header( 'Location: http://yandex.ru/yandsearch?text=redirect', true, 301 ); // сделать переадресацию с помощью 301 редиректа на поиск в яндексе слова redirect.
+header( 'Location: http://google.ru/search?q=redirect' ); // с помощью 302 редиректа переадресовывать на поиск в гугле слова redirect (При использовании Location без указания кода редиректа, по умолчанию используется 302-й).
+header( 'Location: /article/page.htm', true, 303 ); // с помощью 303 редиректа переадресовать на внутреннюю страницу сайта.
+header( 'Location: /', true, 307 ); // перебросить на главную страницу сайта с использованием 307 редиректа.
+header( 'Refresh: 5; url=http://rambler.ru/' ); // переадресовать на главную страницу рамблера через 5 секунд после загрузки страницы.
+header( 'Refresh: 0; url=/error404.html' ); // переадресовать на страницу ошибки немедленно (без задержки).
+?>
+
+
+
+::::::::::::::::  HTML
+
+<meta http-equiv="refresh" content="0; url=http://my-site/index.php">
+===============
+<meta http-equiv="refresh" content="15; url=http://my-site/index.php">
+
+параметры:
+content - время, в секундах, через которое произойдёт переход
+url - адрес, на который произойдёт переход
+
+<?php
+$addr="http://my-site/index.php"
+echo "<html><head><meta http-equiv='refresh' content='0; url=".$addr."' ></head></html>";
+?>
+
+
+
+::::::::::::::::  JavaScript
+
+<script type="text/javascript">
+    document.location.href = "index.php";
+</script>
+
+<script type="text/javascript">
+
+    location="http://yandex.ru";
+    document.location.href="http://yandex.ru";
+    location.replace("http://yandex.ru");
+    window.location.reload("http://yandex.ru");
+    document.location.replace("http://yandex.ru");
+
+</script>
+
+// C задержкой
+<script type="text/javascript">
+function Redirect(){
+    window.location="http://www.newlocation.com";
+}
+document.write("You will be redirected to main page in 10 sec.");
+setTimeout('Redirect()', 10000);
+</script>
+
+
+
+::::::::::::::::  Универсальная функция
+<?php
+function redirect($url = "index.php")
+{
+    if (headers_sent()) {
+        echo "<script>document.location.href='$url';</script>\n";
+    } else {
+        header( 'HTTP/1.1 302 Moved Permanently' );
+        header( "Location: ". $url );
+    }
+} 
+?>
+
+
+
+
+
+::::::::::::::::  Страница переадресации
+<?php
+
+// Страница для редиректа, если нужно переадрисувать с задержкой.
+// Редирект осуществляетьяс переадресацией с GET параметрами - что задают таймер и аддрес
+// Например: http://my-site.com?time=3&url=http://other-site.com/index.php
+
+
+$time = (isset($_GET['time']))? $_GET['time'] : 2 ;
+$url = (isset($_GET['url']))? $_GET['url'] : 'index.php';
+header("Refresh: ".$time."; URL=".$url);
+?>
+<!DOCTYPE HTML>
+
+<html>
+<head>
+  <title>Untitled</title>
+  <link rel="stylesheet" href="" type="text/css" />
+<style type='text/css' rel='stylesheet'>
+*{
+    margin: 0; padding: 0;
+}
+body{
+    background: #222222;
+}
+.loading{
+    display: block;
+    width: 220px;
+    margin: 200px auto ;
+    text-align: center;
+}
+.loading-img{
+    display: block;
+    width: 220px;
+    height: 20px;
+    background: url(images/load.gif) center center no-repeat;
+}
+.loading-text{
+font-family: Consolas, "Lucida Console", Monaco, monospace;
+font-size: 12px;
+font-weight: bold;
+text-shadow: 0px 1px 0px #141414;
+color: #999999;
+}
+.loading-text a{
+    text-decoration: none;
+    color: #FF0000;
+}
+</style>
+</head>
+<body>
+    <div class="loading">
+        <div class="loading-img"></div>
+        <div class="loading-text">loading...</div>
+        <div class="loading-text"><br>if dont redirect you<br><a href="index.php">click this</a></div>
+    </div>
+</body>
+</html>
+
+# ------------------------------------------------------------------------------------

@@ -1,0 +1,64 @@
+/* fonts */
+@import "http://webfonts.ru/import/aleksandrac.css";
+/* font-family: 'AleksandraC'; */
+@import "http://webfonts.ru/import/arnamu.css";
+/* font-family: 'Arian AMU'; */
+@import "http://webfonts.ru/import/ubuntu.css";
+/* font-family: 'Ubuntu Mono'; */
+body{
+    background-color: #333333;
+    font-family: 'AleksandraC', Arian AMU, AleksandraC, Consolas, Courier, monospace, "Courier New";
+    color: #BBBBBB;
+    text-shadow: 0px 1px 0px #4F4F4F;
+}
+.page{
+    width: 860px;
+    margin: 0 auto;
+    background-color: #282828;
+    font-size: 12px;
+    padding: 10px;
+}
+
+/* Parser style */
+.code_header{
+    margin-top: 10px;
+    font-size: 130%;
+    color: #FF5D15;
+    font-weight: bold;
+}
+.code_meta_keys{
+    font-size: 90%;
+    color: #979792;
+    font-style: italic;
+}
+.code_notice{
+    padding: 5px;
+    background-color: #278200;
+    color: #FFF;
+}
+.code_warning{
+     padding: 5px;
+     background-color: #D50015;
+     color: #FFF;
+ }
+.code_info{
+    color: rgb(255, 255, 255);
+    display: inline;
+/*    font-size: 14px;
+    line-height: 25px;*/
+    /*padding: 0 5px;*/
+}
+.code_block{
+    overflow-y: auto;
+    text-shadow: none;
+    margin: 12px 0;
+}
+.code_block pre{
+    display: block;
+}
+.code_block pre code{
+    font-family: Consolas, "Courier New", Courier, monospace;
+}
+.code_link{
+    color: #ff0f00;
+}
